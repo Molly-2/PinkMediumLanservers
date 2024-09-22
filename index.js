@@ -19,7 +19,10 @@ app.get('/generate', async (req, res) => {
     const response = await axios.post('https://api.cohere.ai/generate', {
       model: 'command-xlarge-nightly', // Specify model, or use the default
       prompt: prompt,
-      max_tokens: 100, // Customize max tokens or other options
+      max_tokens: 30000, // Increase max tokens for longer responses
+      temperature: 0.7,  // Adjust creativity (0.7 is moderately creative)
+      k: 0,  // Use top-p sampling if you want more diverse responses
+      stop_sequences: [],  // Optional: Stop generating when a certain sequence appears
     }, {
       headers: {
         Authorization: `Bearer ${cohereApiKey}`,
